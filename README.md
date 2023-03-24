@@ -1,4 +1,4 @@
-# Java-Lab-009
+# Java-Lab-009 - Password Cracking a REAL Linux Shadow File
 
 ## PART 1 - Create User Class
 
@@ -11,6 +11,7 @@ private String passHash;
 * Create 2 methods getUsername and getPassHash that return the instance variables respectively.
 
 ## PART 2 - Implement method parseShadow
+
 * Analyze the method signature **parseShadow** and note what it's return type is below:
     * Return Type?
 * A Unix/Linux Shadow file contains username and password hashes for each user seperated by a delimiter **:**
@@ -25,6 +26,7 @@ private String passHash;
     * and finally store each new User into a User array (i.e. User[] users), and return the array.
   
 ## PART 3 - Implement method crack
+
 * Finish implementing the method crack to do the following:
     * Similar to your parseShadow method, use the **FileInputStream** and **Scanner** class to read the **resources/englishSmall.dic** file line by line.
          * Note: the file path should be passed in a parameter.
@@ -40,4 +42,8 @@ private String passHash;
       ```
 
 ## PART 4 - Turn In
-* Complete the Pull Request Steps that you do every week!!!
+
+* Make sure to use the Git tab at the bottom of IntelliJ to create a Spring2023 feature branch
+* Commit and Push your running code back to your GitHub account
+* Issue a Pull request back to my Java-Lab-009 repo
+* Cut and Paste the Pull request URL into your Canvas assignment to turn it in.
