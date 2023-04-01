@@ -20,6 +20,29 @@ public class Crack {
     }
 
     public void crack() throws FileNotFoundException {
+        FileInputStream fis = new FileInputStream(dictionary);
+        Scanner scanner = new Scanner(fis);
+
+        int counter = 0;
+        while (scanner.hasNextLine()) {
+            String word = scanner.nextLine();
+            counter++;
+
+            if (counter % 100 == 0) {
+                System.out.printf("Testing word %d: %s%n", counter, word);
+            }
+
+            for (User user : users) {
+                if (user.getPassHash().contains("$")) {
+                    String hash = Crypt.crypt(word, user.getPassHash());
+
+                    if (user.getPassHash().equals(hash)) {
+                        System.out.printf("Found password %s for user %s.%n", word, user.getUsername());
+                    }
+                }
+            }
+        }
+        scanner.close();
     }
 
     public static int getLineCount(String path) {
@@ -31,6 +54,26 @@ public class Crack {
     }
 
     public static User[] parseShadow(String shadowFile) throws FileNotFoundException {
+        int lineCount = getLineCount(shadowFile);
+        User[] users = new User[lineCount];
+
+        FileInputStream fis = new FileInputStream(shadowFile);
+        Scanner scanner = new Scanner(fis);
+
+        int index = 0;
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            String[] parts = line.split(":");
+
+            if (parts.length >= 2) {
+                String username = parts[0];
+                String passHash = parts[1];
+                users[index++] = new User(username, passHash);
+            }
+        }
+        scanner.close();
+
+        return users;
     }
 
     public static void main(String[] args) throws FileNotFoundException {
